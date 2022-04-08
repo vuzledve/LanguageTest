@@ -19,7 +19,6 @@ using LanguageTest.Tests;
 //делегаты и эвенты
 //управляемый язык
 //foreach
-for (int i = 0; i < 128; i++)
-    Console.Write("/");
-Menu menu = new Menu();
-menu.Start();
+//for (int i = 0; i < 128; i++)
+//    Console.Write("/");
+Menu.Start();

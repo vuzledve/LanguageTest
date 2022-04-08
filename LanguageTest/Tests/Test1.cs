@@ -8,6 +8,7 @@ namespace LanguageTest.Tests
 {
     internal class Test1 : Base.BaseTest
     {
+        
         public class A
         {
             public virtual void Foo()
@@ -43,7 +44,7 @@ namespace LanguageTest.Tests
                 Console.WriteLine("Class C. Boo\n");
             }
         }
-        public void End() { }
+       
 
         public override void Start()
         {
@@ -71,6 +72,10 @@ namespace LanguageTest.Tests
 
             //a2.Boo();
             b2.Goo();
+        }
+        public Test1()
+        {
+            this.title = "Наследование классов";
         }
     }
 }

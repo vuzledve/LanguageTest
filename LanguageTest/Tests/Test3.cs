@@ -8,7 +8,7 @@ namespace LanguageTest.Tests
 {
     internal class Test3 : Base.BaseTest
     {
-        public void override Start()
+        public override void Start()
         {
 
             int x = 1;

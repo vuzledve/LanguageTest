@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace LanguageTest.Tests
 {
-    //обобщенные типы;
-    internal class Test4 : Base.BaseTest
+    internal class Test_AAA : Base.BaseTest
     {
+        #region Logic
+
+        #endregion
         public override void Start()
         {
-
+  
+        }
+        public Test_AAA()
+        {
+            this.title = "";
         }
     }
 }
