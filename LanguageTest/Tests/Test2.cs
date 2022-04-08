@@ -54,5 +54,9 @@ namespace LanguageTest.Tests
 
 
         }
+        public Test2()
+        {
+            this.title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa bbbb ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
+        }
     }
 }

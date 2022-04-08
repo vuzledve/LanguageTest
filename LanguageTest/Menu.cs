@@ -133,11 +133,62 @@ namespace LanguageTest
         public static void PrintTitle(int topicNum)
         {
             Console.Clear();            
-            Console.WriteLine("///" + "\t\t" + topicNum.ToString() + ". " + allTests[topicNum - 1].title + "\t\t" + "///\n");
+            
+            string title = (topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString();
+            //Console.WriteLine("///" + "\t\t" + title + "\t\t" + "///\n");
+
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("///                                                                                                              ///");
+            string[] titleWords = title.Split(' ');
+            for (int i = 0; i < titleWords.Length; i++)
+            {
+                string titleLine = titleWords[i];
+                while (titleLine.Length < 90)
+                    if (i + 1 < titleWords.Length)
+                    {
+                        if (titleLine.Length + titleWords[i + 1].Length > 89)
+                        {
+                            PrintTitleLine(titleLine);
+                            break;
+                        }
+                        else
+                        {
+                            titleLine += " "+titleWords[i + 1];
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        PrintTitleLine(titleLine);
+                        break;
+                    }
+
+                //while (true)
+                //    if (i + 1 < titleWords.Length || titleLine.Length + titleWords[i + 1].Length > 90)
+                //    {
+                //        PrintTitleLine(titleLine);
+                //        break;
+                //    }
+                //    else
+                //    {
+                //        titleLine += titleWords[i + 1];
+                //        i++;
+                //    }
+            }
+            
+            Console.WriteLine("///                                                                                                              ///");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine();
+
             allTests[topicNum - 1].Start();
 
-
+            //  3/ 10' ' если не влезает то след строка
             //..<- -> следующая тема\предыдущая тема, и кнопку назад
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+            //116 6 20 -->90
             bool correctInput = false;
 
             while (!correctInput)
@@ -192,6 +243,17 @@ namespace LanguageTest
                     correctInput = false;
                 }
             }
+        }
+
+        private static void PrintTitleLine(string line)
+        {
+            Console.Write("///" + "          ");
+            for (int i = 0; i < 45-(line.Length/2); i++)
+                Console.Write(' ');
+            Console.Write(line);
+            for (int i = 0; i < 90 - (45 - (line.Length / 2)) - line.Length; i++)
+                Console.Write(' ');
+            Console.WriteLine("          " + "///");
         }
     }
 }
