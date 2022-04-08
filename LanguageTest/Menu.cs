@@ -34,6 +34,8 @@ namespace LanguageTest
                 //{
                 //    Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
                 //}
+                while (true)
+                    SearchTopic();
 
                 switch (ReadIntFromConsole(1, 4))
                 {
@@ -67,7 +69,37 @@ namespace LanguageTest
 
         private static void SearchTopic()
         {
-            //TO DO
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                Console.WriteLine($"\nВведите подстроку для поиска или оставьте строку пустой для перехода в главное меню: ");
+                try
+                {
+                    string? answer = Console.ReadLine();
+                    if (answer == null || answer == "")
+                        correctInput = true;
+                    else
+                    {
+                        int correct = 0;
+                        for (int i = 0; i < allTests.Count; i++)
+                            if (allTests[i].title != null)
+                                if (allTests[i].title.ToLower().Contains(answer.ToLower()))
+                                {
+                                    Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
+                                    correct++;
+                                }
+                        Console.WriteLine("Найдено совпадений: " + correct);
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Ошибка ввода.");
+                    correctInput = false;
+                }
+            }
+
+            return;
         }
 
 
