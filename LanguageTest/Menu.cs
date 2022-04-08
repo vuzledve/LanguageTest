@@ -23,13 +23,16 @@ namespace LanguageTest
 
         public static void MainWindow()
         {
+            
+
             while (true)
             {
+                PrintHeader("Главное меню");
                 Console.WriteLine("1.Cписок тем");
                 Console.WriteLine("2.Поиск темы");
                 Console.WriteLine("3.Настройки");
                 Console.WriteLine("4.TO DO");
-
+                PrintFooter();
                 //while (true)
                 //{
                 //    Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
@@ -55,22 +58,24 @@ namespace LanguageTest
             }
         }
 
-       
-
         private static void TopicsList()
         {
+            PrintHeader("Список всех тем");
+
             for (int i = 0; i < allTests.Count; i++)
                 Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
 
+            PrintFooter();
             int topicNum = ReadIntFromConsole(1, allTests.Count);
 
-            PrintTitle(topicNum);
+            PrintTest(topicNum);
            
             return;
         }
 
         private static void SearchTopic()
         {
+            PrintHeader("Поиск темы");
             bool correctInput = false;
 
             while (!correctInput)
@@ -104,39 +109,74 @@ namespace LanguageTest
             return;
         }
 
-        private static int ReadIntFromConsole(int min, int max)
-        {
-            int answer = 0;
+        public static void PrintTest(int topicNum)
+        {                    
+            PrintHeader((topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString());
+            allTests[topicNum - 1].Start();
+            PrintFooter();
+
+            //  3/ 10' ' если не влезает то след строка
+            //..<- -> следующая тема\предыдущая тема, и кнопку назад
             bool correctInput = false;
 
             while (!correctInput)
             {
-                Console.Write($"\nВведите число [{min} - {max}]: ");
+                if (topicNum != 1)
+                    Console.WriteLine("Предыдущая тема\t<-");
+                else
+                    Console.WriteLine("Последняя тема \t<-");
+                if (topicNum != allTests.Count)
+                    Console.WriteLine("Следующая тема \t->");
+                else
+                    Console.WriteLine("Первая тема    \t<-");
+                Console.WriteLine("Главное меню   \tN");
+
                 try
                 {
-                    answer = Convert.ToInt32(Console.ReadLine());
-                    if (answer >= min && answer <= max)
-                        correctInput = true;
-                    else
-                        Console.WriteLine("Ошибка ввода. Число выходит за рамки заданного диапазона.");
+                    ConsoleKeyInfo input = Console.ReadKey();
+                    Console.WriteLine();
+
+                    switch (input.Key)
+                    {
+                        //case ConsoleKey.Escape:
+                        case ConsoleKey.N:
+                            correctInput = true;                         
+                            break;
+                        case ConsoleKey.LeftArrow: //<-
+
+                            correctInput = true;
+                            if (topicNum != 1)
+                                PrintTest(topicNum - 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == 1)
+                                PrintTest(allTests.Count); //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        case ConsoleKey.RightArrow: //->
+
+                            correctInput = true;
+                            if (topicNum != allTests.Count)
+                                PrintTest(topicNum + 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == allTests.Count)
+                                PrintTest(1);                  //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        default: 
+                            Console.WriteLine("Ошибка ввода. Введенный символ не совпал ни с одним из указанных.");
+                            correctInput = false;
+                            break;
+                    }                  
                 }
-                catch 
+                catch
                 {
-                    Console.WriteLine("Ошибка ввода. Невозможно преобразовать в Int.");
-                    correctInput = false; 
+                    Console.WriteLine("Ошибка ввода.");
+                    correctInput = false;
                 }
             }
-            
-            return answer;
         }
 
-        public static void PrintTitle(int topicNum)
+        private static void PrintHeader(string title)
         {
-            Console.Clear();            
-            
-            string title = (topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString();
-            //Console.WriteLine("///" + "\t\t" + title + "\t\t" + "///\n");
-
+            Console.Clear();
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("///                                                                                                              ///");
             string[] titleWords = title.Split(' ');
@@ -153,7 +193,7 @@ namespace LanguageTest
                         }
                         else
                         {
-                            titleLine += " "+titleWords[i + 1];
+                            titleLine += " " + titleWords[i + 1];
                             i++;
                         }
                     }
@@ -175,74 +215,18 @@ namespace LanguageTest
                 //        i++;
                 //    }
             }
-            
+
             Console.WriteLine("///                                                                                                              ///");
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine();
+        }
 
-            allTests[topicNum - 1].Start();
-
-            //  3/ 10' ' если не влезает то след строка
-            //..<- -> следующая тема\предыдущая тема, и кнопку назад
-
+        private static void PrintFooter()
+        {
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
             //116 6 20 -->90
-            bool correctInput = false;
-
-            while (!correctInput)
-            {
-                if (topicNum != 1)
-                    Console.WriteLine("Предыдущая тема\t<-");
-                else
-                    Console.WriteLine("Последняя тема \t<-");
-                if (topicNum != allTests.Count)
-                    Console.WriteLine("Следующая тема \t->");
-                else
-                    Console.WriteLine("Первая тема    \t<-");
-                Console.WriteLine("Главное меню   \tEsc");
-
-                try
-                {
-                    ConsoleKeyInfo input = Console.ReadKey();
-                    Console.WriteLine();
-
-                    switch (input.Key)
-                    {
-                        case ConsoleKey.Escape:
-                            correctInput = true;
-                            break;
-                        case ConsoleKey.LeftArrow: //<-
-
-                            correctInput = true;
-                            if (topicNum != 1)
-                                PrintTitle(topicNum - 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
-                            else //(topicNum == 1)
-                                PrintTitle(allTests.Count); //тут рекурсия (в теории бесконечная), TO DO убрать 
-                            break;
-
-                        case ConsoleKey.RightArrow: //->
-
-                            correctInput = true;
-                            if (topicNum != allTests.Count)
-                                PrintTitle(topicNum + 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
-                            else //(topicNum == allTests.Count)
-                                PrintTitle(1);                  //тут рекурсия (в теории бесконечная), TO DO убрать 
-                            break;
-
-                        default: 
-                            Console.WriteLine("Ошибка ввода. Введенный символ не совпал ни с одним из указанных.");
-                            correctInput = false;
-                            break;
-                    }                  
-                }
-                catch
-                {
-                    Console.WriteLine("Ошибка ввода.");
-                    correctInput = false;
-                }
-            }
         }
 
         private static void PrintTitleLine(string line)
@@ -254,6 +238,32 @@ namespace LanguageTest
             for (int i = 0; i < 90 - (45 - (line.Length / 2)) - line.Length; i++)
                 Console.Write(' ');
             Console.WriteLine("          " + "///");
+        }
+
+        private static int ReadIntFromConsole(int min, int max)
+        {
+            int answer = 0;
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                Console.Write($"\nВведите число [{min} - {max}]: ");
+                try
+                {
+                    answer = Convert.ToInt32(Console.ReadLine());
+                    if (answer >= min && answer <= max)
+                        correctInput = true;
+                    else
+                        Console.WriteLine("Ошибка ввода. Число выходит за рамки заданного диапазона.");
+                }
+                catch
+                {
+                    Console.WriteLine("Ошибка ввода. Невозможно преобразовать в Int.");
+                    correctInput = false;
+                }
+            }
+
+            return answer;
         }
     }
 }
