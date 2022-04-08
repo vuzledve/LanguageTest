@@ -27,20 +27,68 @@ namespace LanguageTest
             Console.WriteLine("2.Поиск темы");
             Console.WriteLine("3.Настройки");
             Console.WriteLine("4.TO DO");
+
+            while (true)
+            {
+                Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
+            }
+
+            switch (ReadIntFromConsole(1,4))
+            {
+                case 1:
+                    TopicsList();
+                    break;
+                case 2:
+                    SearchTopic();
+                    break;
+                case 3:
+                    //TO DO
+                    break;
+                case 4:
+                    //TO DO
+                    break;
+            }
         }
 
-        public static void TopicsList()
+       
+
+        private static void TopicsList()
         {
             for (int i = 0; i < allTests.Count; i++)
-                Console.WriteLine((i+1).ToString()+". "+allTests[i].title);
+                Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
 
-            ReadConsole();
+            ReadIntFromConsole(1, allTests.Count);//TO DO
+        }
+        private static void SearchTopic()
+        {
+            //TO DO
         }
 
-        public static int ReadConsole()
-        {
 
-            return 0;
+        private static int ReadIntFromConsole(int min, int max)
+        {
+            int answer = 0;
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                Console.Write($"\nВведите число [{min} - {max}]: ");
+                try
+                {
+                    answer = Convert.ToInt32(Console.ReadLine());
+                    if (answer >= min && answer <= max)
+                        correctInput = true;
+                    else
+                        Console.WriteLine("Ошибка ввода. Число выходит за рамки заданного диапазона.");
+                }
+                catch 
+                {
+                    Console.WriteLine("Ошибка ввода. Невозможно преобразовать в Int.");
+                    correctInput = false; 
+                }
+            }
+            
+            return answer;
         }
 
 
