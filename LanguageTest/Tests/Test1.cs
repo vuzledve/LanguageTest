@@ -11,71 +11,55 @@ namespace LanguageTest.Tests
         
         public class A
         {
-            public virtual void Foo()
-            {
-                Console.WriteLine("Class A");
-                Console.WriteLine();
-            }
-            public void Goo()
-            { 
-                Console.WriteLine("goo\n");
-            }
+           
         }
 
         public class B : A 
         {
-            public override void Foo()
-            {
-                Console.WriteLine("Class B");
-                Console.WriteLine();
-            }
+           
         }
 
-        public class C : B
-        {
-            public override void Foo()
-            {
-                Console.WriteLine("Class C");
-                Console.WriteLine();
-            }
-
-            public void Boo()
-            {
-                Console.WriteLine("Class C. Boo\n");
-            }
-        }
+        
        
 
         public override void Start()
         {
-            /* B - наследник А, а значит в теории не хватает инфы заполнить B */
-            //B b1 = new A(); 
-            //b.Foo();
-            Console.WriteLine("B b1 = new A();");
-            Console.WriteLine("Error. B - наследник А, а значит в теории не хватает инфы заполнить B \n");
-
+            // B b1 = new A(); CTE: Не удается неявно преобразовать тип "A" в "B"
             B b2 = new B();
-            Console.WriteLine("B b2 = new B();");
-            b2.Foo();
+            A a1 = new A();
+            A a2 = new B();
+            // B b3 = (B)a1; RTE: Unable to cast object of type 'A' to type 'B
+            //A a3 = new Object(); CTE: Не удается неявно преобразовать тип "object" в "A"
+        }
 
-            A a1 = new B();
-            Console.WriteLine("A a1 = new B();");
-            a1.Foo();
+        public override void Info()
+        {
+            Console.WriteLine("public class A { }");
+            Console.WriteLine("public class B : A  { }");
+            Console.WriteLine();
 
-            A a2 = new C();
-            Console.WriteLine("A a2 = new C();");
-            a2.Foo();
+            Console.Write("B b1 = new A();\t\t");
+            Console.WriteLine("Ошибка компиляции. B - наследник А, а значит в теории не хватает инфы заполнить B.");
 
-            A a3 = new A();
-            Console.WriteLine("A a3 = new A();");
-            a3.Foo();
+            Console.Write("B b2 = new B();\t\t");
+            Console.WriteLine("ОК.");
 
-            //a2.Boo();
-            b2.Goo();
+            Console.Write("A a1 = new A();\t\t");
+            Console.WriteLine("ОК.");
+
+            Console.Write("A a2 = new B();\t\t");
+            Console.WriteLine("ОК.");
+
+            Console.Write("B b3 = (B)a1;\t\t");
+            Console.WriteLine("Ошибка рантайма. Unable to cast object of type 'A' to type 'B");
+
+            Console.Write("A a3 = new Object();\t");
+            Console.WriteLine("Ошибка компиляции. Не удается неявно преобразовать тип \"object\" в \"A\"");
+
         }
         public Test1()
         {
-            this.title = "Наследование классов";
+            this.title = "Приведение типов.";
         }
     }
 }

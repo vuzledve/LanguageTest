@@ -20,5 +20,10 @@ namespace LanguageTest.Tests
 
 
         }
+        public override void Info()
+        {
+
+
+        }
     }
 }

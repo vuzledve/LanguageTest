@@ -54,6 +54,12 @@ namespace LanguageTest.Tests
 
 
         }
+        public override void Info()
+        {
+            
+
+        }
+
         public Test2()
         {
             this.title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa bbbb ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";

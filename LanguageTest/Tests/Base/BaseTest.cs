@@ -11,6 +11,7 @@ namespace LanguageTest.Tests.Base
         public string title;
 
         public abstract void Start();
-        
+
+        public abstract void Info();
     }
 }

@@ -112,7 +112,7 @@ namespace LanguageTest
         public static void PrintTest(int topicNum)
         {                    
             PrintHeader((topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString());
-            allTests[topicNum - 1].Start();
+            allTests[topicNum - 1].Info();
             PrintFooter();
 
             //  3/ 10' ' если не влезает то след строка
@@ -128,7 +128,7 @@ namespace LanguageTest
                 if (topicNum != allTests.Count)
                     Console.WriteLine("Следующая тема \t->");
                 else
-                    Console.WriteLine("Первая тема    \t<-");
+                    Console.WriteLine("Первая тема    \t->");
                 Console.WriteLine("Главное меню   \tN");
 
                 try
