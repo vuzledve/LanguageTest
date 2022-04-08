@@ -34,8 +34,8 @@ namespace LanguageTest
                 //{
                 //    Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
                 //}
-                while (true)
-                    SearchTopic();
+                //while (true)
+                //    SearchTopic();
 
                 switch (ReadIntFromConsole(1, 4))
                 {
@@ -63,8 +63,10 @@ namespace LanguageTest
                 Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
 
             int topicNum = ReadIntFromConsole(1, allTests.Count);
-            PrintBigTitle(topicNum);
-            allTests[topicNum - 1].Start();
+
+            PrintTitle(topicNum);
+           
+            return;
         }
 
         private static void SearchTopic()
@@ -76,15 +78,15 @@ namespace LanguageTest
                 Console.WriteLine($"\nВведите подстроку для поиска или оставьте строку пустой для перехода в главное меню: ");
                 try
                 {
-                    string? answer = Console.ReadLine();
-                    if (answer == null || answer == "")
+                    string? input = Console.ReadLine();
+                    if (input == null || input == "")
                         correctInput = true;
                     else
                     {
                         int correct = 0;
                         for (int i = 0; i < allTests.Count; i++)
                             if (allTests[i].title != null)
-                                if (allTests[i].title.ToLower().Contains(answer.ToLower()))
+                                if (allTests[i].title.ToLower().Contains(input.ToLower()))
                                 {
                                     Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
                                     correct++;
@@ -101,7 +103,6 @@ namespace LanguageTest
 
             return;
         }
-
 
         private static int ReadIntFromConsole(int min, int max)
         {
@@ -129,16 +130,68 @@ namespace LanguageTest
             return answer;
         }
 
-
-        public static void PrintBigTitle(int topicNum)
+        public static void PrintTitle(int topicNum)
         {
-            Console.Clear();
-            //int WindowSize = 100;
-            string answer = "///" + "\t\t"+ topicNum.ToString() +". " + allTests[topicNum - 1].title + "\t\t" + "///\n";
-            //for (int i = 0; i < (WindowSize - text.Length) / 2; i++)
-            //    answer += @"\";
+            Console.Clear();            
+            Console.WriteLine("///" + "\t\t" + topicNum.ToString() + ". " + allTests[topicNum - 1].title + "\t\t" + "///\n");
+            allTests[topicNum - 1].Start();
 
-            Console.WriteLine(answer);
+
+            //..<- -> следующая тема\предыдущая тема, и кнопку назад
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                if (topicNum != 1)
+                    Console.WriteLine("Предыдущая тема\t<-");
+                else
+                    Console.WriteLine("Последняя тема \t<-");
+                if (topicNum != allTests.Count)
+                    Console.WriteLine("Следующая тема \t->");
+                else
+                    Console.WriteLine("Первая тема    \t<-");
+                Console.WriteLine("Главное меню   \tEsc");
+
+                try
+                {
+                    ConsoleKeyInfo input = Console.ReadKey();
+                    Console.WriteLine();
+
+                    switch (input.Key)
+                    {
+                        case ConsoleKey.Escape:
+                            correctInput = true;
+                            break;
+                        case ConsoleKey.LeftArrow: //<-
+
+                            correctInput = true;
+                            if (topicNum != 1)
+                                PrintTitle(topicNum - 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == 1)
+                                PrintTitle(allTests.Count); //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        case ConsoleKey.RightArrow: //->
+
+                            correctInput = true;
+                            if (topicNum != allTests.Count)
+                                PrintTitle(topicNum + 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == allTests.Count)
+                                PrintTitle(1);                  //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        default: 
+                            Console.WriteLine("Ошибка ввода. Введенный символ не совпал ни с одним из указанных.");
+                            correctInput = false;
+                            break;
+                    }                  
+                }
+                catch
+                {
+                    Console.WriteLine("Ошибка ввода.");
+                    correctInput = false;
+                }
+            }
         }
     }
 }
