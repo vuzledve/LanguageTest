@@ -23,30 +23,33 @@ namespace LanguageTest
 
         public static void MainWindow()
         {
-            Console.WriteLine("1.Cписок тем");
-            Console.WriteLine("2.Поиск темы");
-            Console.WriteLine("3.Настройки");
-            Console.WriteLine("4.TO DO");
-
             while (true)
             {
-                Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
-            }
+                Console.WriteLine("1.Cписок тем");
+                Console.WriteLine("2.Поиск темы");
+                Console.WriteLine("3.Настройки");
+                Console.WriteLine("4.TO DO");
 
-            switch (ReadIntFromConsole(1,4))
-            {
-                case 1:
-                    TopicsList();
-                    break;
-                case 2:
-                    SearchTopic();
-                    break;
-                case 3:
-                    //TO DO
-                    break;
-                case 4:
-                    //TO DO
-                    break;
+                //while (true)
+                //{
+                //    Console.WriteLine("YOUR INPUT: " + ReadIntFromConsole(1, 100).ToString());
+                //}
+
+                switch (ReadIntFromConsole(1, 4))
+                {
+                    case 1:
+                        TopicsList();
+                        break;
+                    case 2:
+                        SearchTopic();
+                        break;
+                    case 3:
+                        //TO DO
+                        break;
+                    case 4:
+                        //TO DO
+                        break;
+                }
             }
         }
 
@@ -57,8 +60,11 @@ namespace LanguageTest
             for (int i = 0; i < allTests.Count; i++)
                 Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
 
-            ReadIntFromConsole(1, allTests.Count);//TO DO
+            int topicNum = ReadIntFromConsole(1, allTests.Count);
+            PrintBigTitle(topicNum);
+            allTests[topicNum - 1].Start();
         }
+
         private static void SearchTopic()
         {
             //TO DO
@@ -92,14 +98,15 @@ namespace LanguageTest
         }
 
 
-        //private int WindowSize = 100;
-        //public string Title(string text)
-        //{
-        //    string answer = "";
-        //    for (int i = 0; i < (WindowSize - text.Length) / 2; i++)
-        //        answer += @"\";
+        public static void PrintBigTitle(int topicNum)
+        {
+            Console.Clear();
+            //int WindowSize = 100;
+            string answer = "///" + "\t\t"+ topicNum.ToString() +". " + allTests[topicNum - 1].title + "\t\t" + "///\n";
+            //for (int i = 0; i < (WindowSize - text.Length) / 2; i++)
+            //    answer += @"\";
 
-        //    return answer;
-        //}
+            Console.WriteLine(answer);
+        }
     }
 }
