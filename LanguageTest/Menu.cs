@@ -46,7 +46,7 @@ namespace LanguageTest
                 //}
                 //while (true)
                 //    SearchTopic();
-
+              
                 switch (ReadIntFromConsole(1, 4))
                 {
                     case 1:
@@ -182,7 +182,41 @@ namespace LanguageTest
         }
         private static void PrintConclusion(string conclusion) //принт вывода\заметок к тесту
         {
-            
+            if (!string.IsNullOrEmpty(conclusion))
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                PrintLineInFrame("Conclusion:");
+
+
+                string[] conclusionWords = conclusion.Split(' ');
+                for (int i = 0; i < conclusionWords.Length; i++)
+                {
+                    string titleLine = conclusionWords[i];
+                    while (titleLine.Length < windowSize - 2 * (marginSize + marginSize))
+                        if (i + 1 < conclusionWords.Length)
+                        {
+                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 2 * (marginSize + marginSize) - 1)
+                            {
+                                Console.WriteLine(titleLine);
+                                break;
+                            }
+                            else
+                            {
+                                titleLine += " " + conclusionWords[i + 1];
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(titleLine);
+                            break;
+                        }
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+            }
         }
         private static void PrintHeader(string title)//принт заголовка окна
         {
@@ -220,7 +254,7 @@ namespace LanguageTest
             Console.WriteLine();
             Console.WriteLine();
         }
-
+     
         private static void PrintFooter() //разделение между контентом и инструкциям к дальнейшим действ. пользователя
         {
             Console.WriteLine();
