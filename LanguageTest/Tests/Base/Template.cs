@@ -21,7 +21,10 @@ namespace LanguageTest.Tests
         }
         public override string Conclusion()
         {
-            return "";
+            return "" +
+                   "" +
+                   "" +
+                   "";
         }
         
         public override string MoreInfo()

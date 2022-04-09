@@ -206,15 +206,16 @@ namespace LanguageTest
                 PrintWindowFrame();
                 PrintLineInFrame("Conclusion:");
                 PrintWindowFrame();
+                Console.WriteLine();
 
                 string[] conclusionWords = conclusion.Split(' ');
                 for (int i = 0; i < conclusionWords.Length; i++)
                 {
                     string titleLine = conclusionWords[i];
-                    while (titleLine.Length < windowSize - 2 * (marginSize + marginSize))
+                    while (titleLine.Length < windowSize)
                         if (i + 1 < conclusionWords.Length)
                         {
-                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 2 * (marginSize + marginSize) - 1)
+                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 1)
                             {
                                 Console.WriteLine(titleLine);
                                 break;
@@ -232,7 +233,6 @@ namespace LanguageTest
                         }
                 }
 
-                Console.WriteLine();
                 Console.WriteLine();
             }
         }
