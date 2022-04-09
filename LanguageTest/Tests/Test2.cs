@@ -115,9 +115,9 @@ namespace LanguageTest.Tests
             Console.Write("Console.WriteLine(B.typeName);\t\t");
             Console.WriteLine(B.typeName);
         }
-        public override void Conclusion()
+        public override string Conclusion()
         {
-
+            return null;
         }
         public Test2()
         {

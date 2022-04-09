@@ -19,9 +19,9 @@ namespace LanguageTest.Tests
         {
 
         }
-        public override void Conclusion()
+        public override string Conclusion()
         {
-
+            return "";
         }
 
         public Test_AAA()

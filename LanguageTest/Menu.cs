@@ -10,6 +10,13 @@ namespace LanguageTest
 {
     static class Menu
     {
+        const int windowSize = 116;
+        const char windowFrameSymbol = '-';
+        const int marginSize = 10;
+        const char marginSymbol = ' ';
+        const int frameSize = 3;
+        const char frameSymbol = '/';
+
         static List <BaseTest> allTests = new List <BaseTest> ();
 
         public static void Start()
@@ -109,7 +116,7 @@ namespace LanguageTest
             return;
         }
 
-        public static void PrintTest(int topicNum)
+        public static void PrintTest(int topicNum)//принт ВСЕЙ страницы теста
         {                    
             PrintHeader((topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString());
             allTests[topicNum - 1].Info();
@@ -173,22 +180,26 @@ namespace LanguageTest
                 }
             }
         }
-
-        private static void PrintHeader(string title)
+        private static void PrintConclusion(string conclusion) //принт вывода\заметок к тесту
+        {
+            
+        }
+        private static void PrintHeader(string title)//принт заголовка окна
         {
             Console.Clear();
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("///                                                                                                              ///");
+            PrintWindowFrame();
+            PrintTopFrame();
+
             string[] titleWords = title.Split(' ');
             for (int i = 0; i < titleWords.Length; i++)
             {
                 string titleLine = titleWords[i];
-                while (titleLine.Length < 90)
+                while (titleLine.Length < windowSize - 2 * (marginSize + marginSize))
                     if (i + 1 < titleWords.Length)
                     {
-                        if (titleLine.Length + titleWords[i + 1].Length > 89)
+                        if (titleLine.Length + titleWords[i + 1].Length > windowSize - 2 * (marginSize + marginSize) - 1)
                         {
-                            PrintTitleLine(titleLine);
+                            PrintLineInFrame(titleLine);
                             break;
                         }
                         else
@@ -199,45 +210,73 @@ namespace LanguageTest
                     }
                     else
                     {
-                        PrintTitleLine(titleLine);
+                        PrintLineInFrame(titleLine);
                         break;
                     }
-
-                //while (true)
-                //    if (i + 1 < titleWords.Length || titleLine.Length + titleWords[i + 1].Length > 90)
-                //    {
-                //        PrintTitleLine(titleLine);
-                //        break;
-                //    }
-                //    else
-                //    {
-                //        titleLine += titleWords[i + 1];
-                //        i++;
-                //    }
             }
 
-            Console.WriteLine("///                                                                                                              ///");
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
+            PrintTopFrame();
+            PrintWindowFrame();
+            Console.WriteLine();
             Console.WriteLine();
         }
 
-        private static void PrintFooter()
+        private static void PrintFooter() //разделение между контентом и инструкциям к дальнейшим действ. пользователя
         {
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
-            //116 6 20 -->90
+            PrintWindowFrame();  
         }
 
-        private static void PrintTitleLine(string line)
+        private static void PrintLineInFrame(string line) //Console.WriteLine("///  line  ///") 
         {
-            Console.Write("///" + "          ");
-            for (int i = 0; i < 45-(line.Length/2); i++)
-                Console.Write(' ');
+            PrintLeftMargin();
+           
+            for (int i = 0; i < (windowSize - 2 * (marginSize + frameSize) - line.Length) / 2; i++) 
+                Console.Write(marginSymbol);
+
             Console.Write(line);
-            for (int i = 0; i < 90 - (45 - (line.Length / 2)) - line.Length; i++)
-                Console.Write(' ');
-            Console.WriteLine("          " + "///");
+            
+            for (int i = 0; i < (windowSize / 2) -  (marginSize + frameSize) - (line.Length/2); i++)
+                Console.Write(marginSymbol);
+  
+            PrintRightMargin();
+        }
+
+        private static void PrintTopFrame() //Console.WriteLine("///    ///")
+        {
+            for (int i = 0; i < frameSize; i++)
+                Console.Write(frameSymbol);
+            for (int i = 0; i < windowSize - frameSize*2; i++)
+                Console.Write(marginSymbol);
+            for (int i = 0; i < frameSize; i++)
+                Console.Write(frameSymbol);
+            Console.WriteLine();
+        }
+        private static void PrintLeftMargin() //Console.Write("///" + "          ");
+        {
+            for (int i = 0; i < frameSize; i++)
+                Console.Write(frameSymbol);
+
+            for (int i = 0; i < marginSize; i++)
+                Console.Write(marginSymbol);
+        }
+
+        private static void PrintRightMargin() //Console.Write("          " + "///");
+        {
+            for (int i = 0; i < marginSize; i++)
+                Console.Write(marginSymbol);
+
+            for (int i = 0; i < frameSize; i++)
+                Console.Write(frameSymbol);
+            Console.WriteLine();
+        }
+
+        private static void PrintWindowFrame() //Console.WriteLine("-----------")//строка символов "-" размером windowSize;
+        {
+            for (int i = 0; i < windowSize; i++)
+                Console.Write(windowFrameSymbol);
+            Console.WriteLine();
         }
 
         private static int ReadIntFromConsole(int min, int max)

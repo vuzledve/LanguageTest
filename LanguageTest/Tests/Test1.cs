@@ -54,9 +54,9 @@ namespace LanguageTest.Tests
             Console.WriteLine("Ошибка компиляции. Не удается неявно преобразовать тип \"object\" в \"A\"");
 
         }
-        public override void Conclusion()
+        public override string Conclusion()
         {
-
+            return null;
         }
         public Test1()
         {
