@@ -13,9 +13,13 @@ namespace LanguageTest.Tests
         #endregion
         public override void Start()
         {
-  
+
         }
         public override void Info()
+        {
+
+        }
+        public override void Conclusion()
         {
 
         }

@@ -25,5 +25,9 @@ namespace LanguageTest.Tests
 
 
         }
+        public override void Conclusion()
+        {
+
+        }
     }
 }

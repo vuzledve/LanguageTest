@@ -115,7 +115,10 @@ namespace LanguageTest.Tests
             Console.Write("Console.WriteLine(B.typeName);\t\t");
             Console.WriteLine(B.typeName);
         }
+        public override void Conclusion()
+        {
 
+        }
         public Test2()
         {
             this.title = "Скрытие методов и свойств с помощью ключевого слова new.";

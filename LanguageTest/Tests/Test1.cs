@@ -54,7 +54,10 @@ namespace LanguageTest.Tests
             Console.WriteLine("Ошибка компиляции. Не удается неявно преобразовать тип \"object\" в \"A\"");
 
         }
+        public override void Conclusion()
+        {
 
+        }
         public Test1()
         {
             this.title = "Приведение типов.";
