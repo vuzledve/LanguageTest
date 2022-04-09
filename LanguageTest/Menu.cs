@@ -37,8 +37,9 @@ namespace LanguageTest
                 PrintHeader("Главное меню");
                 Console.WriteLine("1.Cписок тем");
                 Console.WriteLine("2.Поиск темы");
-                Console.WriteLine("3.Настройки");
+                Console.WriteLine("3.Запуск теста");
                 Console.WriteLine("4.TO DO");
+                Console.WriteLine("5.Настройки");
                 PrintFooter();
                 //while (true)
                 //{
@@ -47,7 +48,7 @@ namespace LanguageTest
                 //while (true)
                 //    SearchTopic();
               
-                switch (ReadIntFromConsole(1, 4))
+                switch (ReadIntFromConsole(1, 5))
                 {
                     case 1:
                         TopicsList();
@@ -59,6 +60,9 @@ namespace LanguageTest
                         //TO DO
                         break;
                     case 4:
+                        //TO DO
+                        break;
+                    case 5:
                         //TO DO
                         break;
                 }
@@ -75,7 +79,7 @@ namespace LanguageTest
             PrintFooter();
             int topicNum = ReadIntFromConsole(1, allTests.Count);
 
-            PrintTest(topicNum);
+            PrintTest(topicNum, false);
            
             return;
         }
@@ -91,7 +95,7 @@ namespace LanguageTest
                 try
                 {
                     string? input = Console.ReadLine();
-                    if (input == null || input == "")
+                    if (input == null || input == "") //isNullOrEmpty
                         correctInput = true;
                     else
                     {
@@ -116,10 +120,13 @@ namespace LanguageTest
             return;
         }
 
-        public static void PrintTest(int topicNum)//принт ВСЕЙ страницы теста
+        public static void PrintTest(int topicNum, bool printDetails)//принт ВСЕЙ страницы теста
         {                    
             PrintHeader((topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString());
             allTests[topicNum - 1].Info();
+            PrintConclusion(allTests[topicNum - 1].Conclusion());
+            if (printDetails)
+                PrintDetails();
             PrintFooter();
 
             //  3/ 10' ' если не влезает то след строка
@@ -129,14 +136,16 @@ namespace LanguageTest
             while (!correctInput)
             {
                 if (topicNum != 1)
-                    Console.WriteLine("Предыдущая тема\t<-");
+                    Console.WriteLine("Предыдущая тема\t\t\t<-");
                 else
-                    Console.WriteLine("Последняя тема \t<-");
+                    Console.WriteLine("Последняя тема \t\t\t<-");
                 if (topicNum != allTests.Count)
-                    Console.WriteLine("Следующая тема \t->");
+                    Console.WriteLine("Следующая тема \t\t\t->");
                 else
-                    Console.WriteLine("Первая тема    \t->");
-                Console.WriteLine("Главное меню   \tN");
+                    Console.WriteLine("Первая тема    \t\t\t->");
+                if (!printDetails)
+                    Console.WriteLine("Дополнительная информация\tI");
+                Console.WriteLine("Главное меню   \t\t\tN");
 
                 try
                 {
@@ -149,22 +158,26 @@ namespace LanguageTest
                         case ConsoleKey.N:
                             correctInput = true;                         
                             break;
+                        case ConsoleKey.I:
+                            correctInput = true;
+                            PrintTest(topicNum, true);        //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
                         case ConsoleKey.LeftArrow: //<-
 
                             correctInput = true;
                             if (topicNum != 1)
-                                PrintTest(topicNum - 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                                PrintTest(topicNum - 1, false);        //тут рекурсия (в теории бесконечная), TO DO убрать 
                             else //(topicNum == 1)
-                                PrintTest(allTests.Count); //тут рекурсия (в теории бесконечная), TO DO убрать 
+                                PrintTest(allTests.Count, false);      //тут рекурсия (в теории бесконечная), TO DO убрать 
                             break;
 
                         case ConsoleKey.RightArrow: //->
 
                             correctInput = true;
                             if (topicNum != allTests.Count)
-                                PrintTest(topicNum + 1);       //тут рекурсия (в теории бесконечная), TO DO убрать 
+                                PrintTest(topicNum + 1, false);        //тут рекурсия (в теории бесконечная), TO DO убрать 
                             else //(topicNum == allTests.Count)
-                                PrintTest(1);                  //тут рекурсия (в теории бесконечная), TO DO убрать 
+                                PrintTest(1, false);                   //тут рекурсия (в теории бесконечная), TO DO убрать 
                             break;
 
                         default: 
@@ -180,14 +193,19 @@ namespace LanguageTest
                 }
             }
         }
+        private static void PrintDetails() //принт большого конспекта к тесту
+        {
+            
+        }
         private static void PrintConclusion(string conclusion) //принт вывода\заметок к тесту
         {
             if (!string.IsNullOrEmpty(conclusion))
             {
                 Console.WriteLine();
                 Console.WriteLine();
+                PrintWindowFrame();
                 PrintLineInFrame("Conclusion:");
-
+                PrintWindowFrame();
 
                 string[] conclusionWords = conclusion.Split(' ');
                 for (int i = 0; i < conclusionWords.Length; i++)

@@ -119,6 +119,11 @@ namespace LanguageTest.Tests
         {
             return null;
         }
+        public override string MoreInfo()
+        {
+            return "";
+        }
+
         public Test2()
         {
             this.title = "Скрытие методов и свойств с помощью ключевого слова new.";

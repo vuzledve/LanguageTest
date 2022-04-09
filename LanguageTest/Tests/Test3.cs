@@ -29,5 +29,10 @@ namespace LanguageTest.Tests
         {
             return null;
         }
+        public override string MoreInfo()
+        {
+            return "";
+        }
+
     }
 }

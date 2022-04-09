@@ -23,6 +23,11 @@ namespace LanguageTest.Tests
         {
             return "";
         }
+        
+        public override string MoreInfo()
+        {
+            return "";
+        }
 
         public Test_AAA()
         {

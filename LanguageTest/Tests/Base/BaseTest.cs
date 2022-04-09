@@ -13,6 +13,8 @@ namespace LanguageTest.Tests.Base
         public abstract void Start();
 
         public abstract void Info();
-        public abstract string Conclusion();
+        public abstract string Conclusion(); //краткий вывод
+
+        public abstract string MoreInfo(); //информация, взятая из открытых источников
     }
 }

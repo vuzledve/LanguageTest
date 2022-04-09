@@ -83,6 +83,11 @@ namespace LanguageTest.Tests
         {
             return null;
         }
+        public override string MoreInfo()
+        {
+            return "";
+        }
+
         public Test4()
         {
             this.title = @"Vurtual \ override";
