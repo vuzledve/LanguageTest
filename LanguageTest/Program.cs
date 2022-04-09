@@ -6,11 +6,11 @@ using LanguageTest.Tests;
 //Console.WriteLine(~a);
 
 //список уроков
-Test1 test1 = new Test1();
-test1.Start();
+//Test1 test1 = new Test1();
+//test1.Start();
 
-////Test2 test2 = new Test2();
-////test2.Start();
+//Test2 test2 = new Test2();
+//test2.Start();
 
 //Test3 test3 = new Test3();
 //test3.Start();

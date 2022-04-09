@@ -81,7 +81,7 @@ namespace LanguageTest.Tests
         }
         public Test4()
         {
-            this.title = "Наследование классов.";
+            this.title = @"Vurtual \ override";
         }
     }
 }

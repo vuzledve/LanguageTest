@@ -19,9 +19,6 @@ namespace LanguageTest.Tests
            
         }
 
-        
-       
-
         public override void Start()
         {
             // B b1 = new A(); CTE: Не удается неявно преобразовать тип "A" в "B"
@@ -29,7 +26,7 @@ namespace LanguageTest.Tests
             A a1 = new A();
             A a2 = new B();
             // B b3 = (B)a1; RTE: Unable to cast object of type 'A' to type 'B
-            //A a3 = new Object(); CTE: Не удается неявно преобразовать тип "object" в "A"
+            // A a3 = new Object(); CTE: Не удается неявно преобразовать тип "object" в "A"
         }
 
         public override void Info()
@@ -57,6 +54,7 @@ namespace LanguageTest.Tests
             Console.WriteLine("Ошибка компиляции. Не удается неявно преобразовать тип \"object\" в \"A\"");
 
         }
+
         public Test1()
         {
             this.title = "Приведение типов.";
