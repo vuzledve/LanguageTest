@@ -25,7 +25,7 @@ namespace LanguageTest
             allTests.Add(new Test2());
             allTests.Add(new Test3());
             allTests.Add(new Test4());
-            //allTests.Add(new Test5());
+            allTests.Add(new Test5());
             //allTests.Add(new Test6());
             //allTests.Add(new Test7());
             //allTests.Add(new Test8());

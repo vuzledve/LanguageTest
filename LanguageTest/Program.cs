@@ -20,6 +20,7 @@ using LanguageTest.Tests;
 //обобщенные типы;
 //делегаты и эвенты
 //управляемый язык
+//упаковка (boxing) и распаковка (unboxing).
 //foreach
 //for (int i = 0; i < 128; i++)
 //    Console.Write("/");
