@@ -15,7 +15,6 @@ namespace LanguageTest.Tests
             public virtual void Foo()
             {
                 Console.WriteLine("Class A");
-                Console.WriteLine();
             }
             public void Goo()
             {
@@ -28,7 +27,6 @@ namespace LanguageTest.Tests
             public override void Foo()
             {
                 Console.WriteLine("Class B");
-                Console.WriteLine();
             }
         }
 
@@ -37,7 +35,6 @@ namespace LanguageTest.Tests
             public override void Foo()
             {
                 Console.WriteLine("Class C");
-                Console.WriteLine();
             }
 
             public void Boo()

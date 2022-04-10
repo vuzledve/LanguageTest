@@ -24,7 +24,24 @@ namespace LanguageTest
             allTests.Add(new Test1());
             allTests.Add(new Test2());
             allTests.Add(new Test3());
-
+            allTests.Add(new Test4());
+            //allTests.Add(new Test5());
+            //allTests.Add(new Test6());
+            //allTests.Add(new Test7());
+            //allTests.Add(new Test8());
+            //allTests.Add(new Test9());
+            //allTests.Add(new Test10());
+            //allTests.Add(new Test11());
+            //allTests.Add(new Test12());
+            //allTests.Add(new Test13());
+            //allTests.Add(new Test14());
+            //allTests.Add(new Test15());
+            //allTests.Add(new Test16());
+            //allTests.Add(new Test17());
+            //allTests.Add(new Test18());
+            //allTests.Add(new Test19());
+            //allTests.Add(new Test20());
+          
             MainWindow();
         }
 
@@ -57,7 +74,7 @@ namespace LanguageTest
                         SearchTopic();
                         break;
                     case 3:
-                        //TO DO
+                        TestsList();
                         break;
                     case 4:
                         //TO DO
@@ -82,6 +99,88 @@ namespace LanguageTest
             PrintTest(topicNum, false);
            
             return;
+        }
+
+        private static void TestsList()
+        {
+            PrintHeader("Запуск теста (метод Start())");
+
+            for (int i = 0; i < allTests.Count; i++)
+                Console.WriteLine((i + 1).ToString() + ". " + allTests[i].title);
+
+            PrintFooter();
+            Console.WriteLine("Введите 0 для возврата в главное меню.");
+            int topicNum = ReadIntFromConsole(0, allTests.Count);
+
+            StartTest(topicNum);
+
+            return;
+        }
+        public static void StartTest(int topicNum)//запуск теста
+        {
+            PrintHeader((topicNum.ToString() + ". " + allTests[topicNum - 1].title).ToString() +". ТЕСТИРОВАНИЕ.");
+            allTests[topicNum - 1].Start();
+            PrintFooter();
+
+            //  3/ 10' ' если не влезает то след строка
+            //..<- -> следующая тема\предыдущая тема, и кнопку назад
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                if (topicNum != 1)
+                    Console.WriteLine("Предыдущая тема\t\t\t<-");
+                else
+                    Console.WriteLine("Последняя тема \t\t\t<-");
+                if (topicNum != allTests.Count)
+                    Console.WriteLine("Следующая тема \t\t\t->");
+                else
+                    Console.WriteLine("Первая тема    \t\t\t->");
+                
+                Console.WriteLine("Главное меню   \t\t\tN");
+
+                try
+                {
+                    ConsoleKeyInfo input = Console.ReadKey();
+                    Console.WriteLine();
+
+                    switch (input.Key)
+                    {
+                        //case ConsoleKey.Escape:
+                        case ConsoleKey.N:
+                            correctInput = true;
+                            break;
+                        
+                        case ConsoleKey.LeftArrow: //<-
+
+                            correctInput = true;
+                            if (topicNum != 1)
+                                StartTest(topicNum - 1);        //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == 1)
+                                StartTest(allTests.Count);      //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        case ConsoleKey.RightArrow: //->
+
+                            correctInput = true;
+                            if (topicNum != allTests.Count)
+                                StartTest(topicNum + 1);        //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            else //(topicNum == allTests.Count)
+                                StartTest(1);                   //тут рекурсия (в теории бесконечная), TO DO убрать 
+                            break;
+
+                        default:
+                            Console.WriteLine("Ошибка ввода. Введенный символ не совпал ни с одним из указанных.");
+                            correctInput = false;
+                            break;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Ошибка ввода.");
+                    correctInput = false;
+                }
+            }
         }
 
         private static void SearchTopic()

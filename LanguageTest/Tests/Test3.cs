@@ -61,8 +61,8 @@ namespace LanguageTest.Tests
             Console.WriteLine("");
             Console.WriteLine("int a1 = 3, a2 = 3;");
             Console.WriteLine("int b1 = 5, b2 = 5;");
-            Console.WriteLine("int v = --a + b;             //a1 = 2; v = 7; при префиксе сначала вып. преф., после - остальное");
-            Console.WriteLine("int f = a-- + b;             //a2 = 2; f = 8; при постфиксе сначала вып. основн., после - постф.");
+            Console.WriteLine("int v = --a1 + b1;             //a1 = 2; v = 7; при префиксе сначала вып. преф., после - остальное");
+            Console.WriteLine("int f = a2-- + b2;             //a2 = 2; f = 8; при постфиксе сначала вып. основн., после - постф.");
             Console.WriteLine("");
             Console.WriteLine("double doub = 0;");
             Console.WriteLine("for (int i = 0; i < 10; i++)");
