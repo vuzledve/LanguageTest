@@ -12,8 +12,8 @@ using LanguageTest.Tests;
 //Test2 test2 = new Test2();
 //test2.Start();
 
-//Test3 test3 = new Test3();
-//test3.Start();
+Test3 test3 = new Test3();
+test3.Start();
 
 //обобщенные типы;
 //делегаты и эвенты

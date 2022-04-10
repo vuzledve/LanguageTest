@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LanguageTest
 {
-    static class Menu
+    static class Menu //https://www.videosharp.info/article/sharp/id=513
     {
         const int windowSize = 116;
         const char windowFrameSymbol = '-';
@@ -231,6 +231,7 @@ namespace LanguageTest
                             Console.WriteLine(titleLine);
                             break;
                         }
+
                 }
 
                 Console.WriteLine();
