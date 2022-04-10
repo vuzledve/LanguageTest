@@ -212,21 +212,21 @@ namespace LanguageTest
                 for (int i = 0; i < conclusionWords.Length; i++)
                 {
                     string titleLine = conclusionWords[i];
-                    while (titleLine.Length < windowSize)
-                        if (i + 1 < conclusionWords.Length)
+                    while (titleLine.Length <= windowSize)
+                        if (i + 1 < conclusionWords.Length) //если текущее слово не последнее
                         {
-                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 1)
+                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 1) //если длина уже сущ строки + добавляемой больше окна
                             {
-                                Console.WriteLine(titleLine);
+                                Console.WriteLine(titleLine); //прнт строки + выход из while
                                 break;
                             }
-                            else
+                            else //если длины меньше
                             {
-                                titleLine += " " + conclusionWords[i + 1];
+                                titleLine += " " + conclusionWords[i + 1]; //складываем строки
                                 i++;
                             }
                         }
-                        else
+                        else //если тек слово последнее
                         {
                             Console.WriteLine(titleLine);
                             break;
@@ -246,7 +246,7 @@ namespace LanguageTest
             for (int i = 0; i < titleWords.Length; i++)
             {
                 string titleLine = titleWords[i];
-                while (titleLine.Length < windowSize - 2 * (marginSize + marginSize))
+                while (titleLine.Length <= windowSize - 2 * (marginSize + marginSize))
                     if (i + 1 < titleWords.Length)
                     {
                         if (titleLine.Length + titleWords[i + 1].Length > windowSize - 2 * (marginSize + marginSize) - 1)
