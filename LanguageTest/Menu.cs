@@ -112,7 +112,8 @@ namespace LanguageTest
             Console.WriteLine("Введите 0 для возврата в главное меню.");
             int topicNum = ReadIntFromConsole(0, allTests.Count);
 
-            StartTest(topicNum);
+            if (topicNum != 0)
+                StartTest(topicNum);
 
             return;
         }
