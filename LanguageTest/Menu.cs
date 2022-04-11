@@ -10,6 +10,7 @@ namespace LanguageTest
 {
     static class Menu //https://www.videosharp.info/article/sharp/id=513
     {
+        
         const int windowSize = 116;
         const char windowFrameSymbol = '-';
         const int marginSize = 10;
@@ -26,9 +27,9 @@ namespace LanguageTest
             allTests.Add(new Test3());
             allTests.Add(new Test4());
             allTests.Add(new Test5());
-            //allTests.Add(new Test6());
-            //allTests.Add(new Test7());
-            //allTests.Add(new Test8());
+            allTests.Add(new Test6());
+            allTests.Add(new Test7());
+            allTests.Add(new Test8());
             //allTests.Add(new Test9());
             //allTests.Add(new Test10());
             //allTests.Add(new Test11());
