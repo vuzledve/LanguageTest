@@ -308,32 +308,35 @@ namespace LanguageTest
                 PrintLineInFrame("Conclusion:");
                 PrintWindowFrame();
                 Console.WriteLine();
+                string[] conclusionParagraphs = conclusion.Split('\n');
 
-                string[] conclusionWords = conclusion.Split(' ');
-                for (int i = 0; i < conclusionWords.Length; i++)
+                for (int j = 0; j < conclusionParagraphs.Length; j++)
                 {
-                    string titleLine = conclusionWords[i];
-                    while (titleLine.Length <= windowSize)
-                        if (i + 1 < conclusionWords.Length) //если текущее слово не последнее
-                        {
-                            if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 1) //если длина уже сущ строки + добавляемой больше окна
+                    string[] conclusionWords = conclusionParagraphs[j].Split(' ');
+                    for (int i = 0; i < conclusionWords.Length; i++)
+                    {
+                        string titleLine = conclusionWords[i];
+                        while (titleLine.Length <= windowSize)
+                            if (i + 1 < conclusionWords.Length) //если текущее слово не последнее
                             {
-                                Console.WriteLine(titleLine); //прнт строки + выход из while
+                                if (titleLine.Length + conclusionWords[i + 1].Length > windowSize - 1) //если длина уже сущ строки + добавляемой больше окна
+                                {
+                                    Console.WriteLine(titleLine); //прнт строки + выход из while
+                                    break;
+                                }
+                                else //если длины меньше
+                                {
+                                    titleLine += " " + conclusionWords[i + 1]; //складываем строки
+                                    i++;
+                                }
+                            }
+                            else //если тек слово последнее
+                            {
+                                Console.WriteLine(titleLine);
                                 break;
                             }
-                            else //если длины меньше
-                            {
-                                titleLine += " " + conclusionWords[i + 1]; //складываем строки
-                                i++;
-                            }
-                        }
-                        else //если тек слово последнее
-                        {
-                            Console.WriteLine(titleLine);
-                            break;
-                        }
-
-                }
+                    }
+                }  
 
                 Console.WriteLine();
             }
