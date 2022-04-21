@@ -226,28 +226,43 @@ namespace LanguageTest.Tests
 
             int Add(int x, int y) => x + y;
             int Subtract(int x, int y) => x - y;
-            int Multiply(int x, int y) => x * y; 
+            int Multiply(int x, int y) => x * y;
+            #endregion
+
+
+            #region Анонимные методы
+            Message MyMess = delegate ()
+            {
+                Console.WriteLine("myMess");
+            };
+            MyMess();
             #endregion
         }
 
 
         public override void Info()
         {
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
+            Console.WriteLine("delegate T GenericDel<T, K>(K val);   //объявляем делегат");
+            Console.WriteLine("decimal Square(int n) => n * n;       //метод decimal (int)");
+            Console.WriteLine("int Double(int n) => n + n;           //метод int (int)");
+
+            Console.WriteLine();
+
+            Console.WriteLine("GenericDel<decimal, int> squareOperation = Square;  //Экземпляр делегата");
+            Console.WriteLine("decimal result1 = squareOperation(5);               //25");
+
+            Console.WriteLine();
+
+            Console.WriteLine("GenericDel<int, int> doubleOperation = Double;      //Экземпляр делегата");
+            Console.WriteLine("int result2 = doubleOperation(5);                   //10");
+
         }
         public override string Conclusion()
         {
-            return "delegate [возвращаемый_тип] [название_делегата] ([возвращаемые параметры]);\n" +
+            //Делегирование — передача задач
+
+            return "Делегат - тип в языке, который способен хранить ссылку(и) на метод(ы)\n" +
+                   "[модификатор доступа] delegate [возвращаемый_тип] [название_делегата] ([возвращаемые параметры]);\n" +
                    "delegate T GenericDel<T, K> (K val); Делегат с сигнатурой T (K). После имени указываем универсальные параметры<T, K>\n" +
                    "Делегат можно объявлять в классах или в namespase (но не в методе).\n" +
                    "Экземпляр делегата: [название_делегата] [название_переменной] = [функция];\n" +
@@ -258,9 +273,9 @@ namespace LanguageTest.Tests
                    "Прибавить функцию +=, вычесть -=. Делегаты одного типа можно складывать. " +
                    "Метод .Invoke() вызывает делегат. Если в делегате несколько функций - вернется результат последней.\n" +
                    "Делегат можно объявить как параметр метода. Благодаря этому один метод в качестве параметров может получать действия - другие методы\n" +
-                   "Также делегаты можно возвращать из методов. То есть мы можем возвращать из метода какое-то действие в виде другого метода." +
-                   "В этом случае возвращаемым параметром из метода будет делегат, а в return записывается функция: return MyFunc" +
-                   "";
+                   "Также делегаты можно возвращать из методов. То есть мы можем возвращать из метода какое-то действие в виде другого метода. " +
+                   "В этом случае возвращаемым параметром из метода будет делегат, а в return записывается функция: return MyFunc\n" +
+                   "Анонимный метод Message MyMess = delegate (){...}; ";
         }
 
         public override string MoreInfo()

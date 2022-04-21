@@ -22,7 +22,8 @@ namespace LanguageTest.Tests
         }
         public override string Conclusion()
         {
-            return "" +
+            return "Интерфейс IDisposable объявляет один единственный метод Dispose, " +
+                "в котором при реализации интерфейса в классе должно происходить освобождение неуправляемых ресурсов" +
                    "" +
                    "" +
                    "";
@@ -35,7 +36,8 @@ namespace LanguageTest.Tests
 
         public Test8()
         {
-            this.title = "foreach";
+            //this.title = "foreach";
+            this.title = "Dispose";
         }
     }
 }
